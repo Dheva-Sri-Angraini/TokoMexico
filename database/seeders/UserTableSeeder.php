@@ -29,7 +29,6 @@ class UserTableSeeder extends Seeder
                 'foto' => '/img/user.jpg',
                 'level' => 1
             ],
-            
             [
                 'name' => 'Kasir 1',
                 'email' => 'kasir1@gmail.com',
