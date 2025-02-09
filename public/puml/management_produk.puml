@@ -1,0 +1,50 @@
+@startuml
+|Admin|
+start
+: Membuka form login;
+|Sistem|
+: Menampilkan Form Login;
+|Admin|
+: Memasukkan Username, Password, dan Security Code;
+|Sistem|
+: Memverifikasi;
+
+if (Validasi?) then (Salah)
+    stop
+else (Benar)
+    :Menampilkan halaman dashboard;
+endif
+
+|Admin|
+: Mengakses Manajemen Produk;
+|Sistem|
+: Menampilkan menu manajemen produk;
+
+switch (Pilih Aksi)
+case (Tambah Produk)
+    |Admin|
+    : Memasukkan nama produk, kategori, merk, harga beli, harga jual, diskon, stok;
+    |Sistem|
+    : Menyimpan produk ke database;
+case (Edit Produk)
+    |Admin|
+    : Memilih produk yang akan diedit;
+    : Mengubah detail produk;
+    |Sistem|
+    : Memperbarui produk di database;
+case (Hapus Produk)
+    |Admin|
+    : Memilih produk yang akan dihapus;
+    |Sistem|
+    : Konfirmasi penghapusan;
+    if (Konfirmasi?) then (Ya)
+        :Menghapus produk dari database;
+    else (Tidak)
+        :Batal;
+    endif
+endswitch
+
+:Tampilkan notifikasi sukses;
+stop
+@enduml
+

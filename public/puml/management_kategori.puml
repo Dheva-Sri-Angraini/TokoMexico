@@ -1,0 +1,50 @@
+@startuml
+|Admin|
+start
+: Membuka form login;
+|Sistem|
+: Menampilkan Form Login;
+|Admin|
+: Memasukkan Username, Password, dan Security Code;
+|Sistem|
+: Memverifikasi;
+
+if (Validasi?) then (Salah)
+    stop
+else (Benar)
+    :Menampilkan halaman dashboard;
+endif
+
+|Admin|
+: Mengakses Manajemen Kategori;
+|Sistem|
+: Menampilkan menu manajemen kategori;
+
+switch (Pilih Aksi)
+case (Tambah Kategori)
+    |Admin|
+    : Memasukkan nama kategori baru;
+    |Sistem|
+    : Menyimpan kategori ke database;
+case (Edit Kategori)
+    |Admin|
+    : Memilih kategori yang akan diedit;
+    : Mengubah nama kategori;
+    |Sistem|
+    : Memperbarui kategori di database;
+case (Hapus Kategori)
+    |Admin|
+    : Memilih kategori yang akan dihapus;
+    |Sistem|
+    : Konfirmasi penghapusan;
+    if (Konfirmasi?) then (Ya)
+        :Menghapus kategori dari database;
+    else (Tidak)
+        :Batal;
+    endif
+endswitch
+
+:Tampilkan notifikasi sukses;
+stop
+@enduml
+

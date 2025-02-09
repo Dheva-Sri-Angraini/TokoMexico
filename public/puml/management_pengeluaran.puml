@@ -1,0 +1,49 @@
+@startuml
+|Admin|
+start
+: Membuka form login;
+|Sistem|
+: Menampilkan Form Login;
+|Admin|
+: Memasukkan Username, Password, dan Security Code;
+|Sistem|
+: Memverifikasi;
+
+if (Validasi?) then (Salah)
+    stop
+else (Benar)
+    :Menampilkan halaman dashboard;
+endif
+
+|Admin|
+: Mengakses Manajemen Pengeluaran;
+|Sistem|
+: Menampilkan menu pengeluaran;
+
+switch (Pilih Aksi)
+case (Tambah Pengeluaran)
+    |Admin|
+    : Memasukkan deskripsi dan nominal;
+    |Sistem|
+    : Menyimpan ke database;
+case (Edit Pengeluaran)
+    |Admin|
+    : Memilih pengeluaran untuk diedit;
+    : Mengubah informasi pengeluaran;
+    |Sistem|
+    : Memperbarui data di database;
+case (Hapus Pengeluaran)
+    |Admin|
+    : Memilih pengeluaran untuk dihapus;
+    |Sistem|
+    : Konfirmasi penghapusan;
+    if (Konfirmasi?) then (Ya)
+        :Menghapus pengeluaran dari database;
+    else (Tidak)
+        :Batal;
+    endif
+endswitch
+
+stop
+@enduml
+

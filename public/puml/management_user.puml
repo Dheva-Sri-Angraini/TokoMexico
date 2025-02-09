@@ -1,0 +1,62 @@
+@startuml
+|Admin|
+start
+: Membuka form login;
+|Sistem|
+: Menampilkan Form Login;
+|Admin|
+: Memasukkan Username, Password, dan Security Code;
+|Sistem|
+: Memverifikasi;
+
+if (Validasi?) then (Salah)
+    stop
+else (Benar)
+    :Menampilkan halaman dashboard;
+endif
+
+|Admin|
+: Mengakses Manajemen User;
+|Sistem|
+: Menampilkan menu manajemen user;
+
+switch (Pilih Aksi)
+case (Tambah User)
+    |Admin|
+    : Memasukkan nama, email, password, dan konfirmasi password;
+    |Sistem|
+    : Memeriksa apakah email sudah terdaftar?;
+    if (Email tersedia?) then (Tidak)
+        :Tampilkan pesan error "Email sudah digunakan";
+        stop
+    else (Ya)
+        if (Password cocok?) then (Tidak)
+            :Tampilkan pesan error "Password tidak sesuai";
+            stop
+        else (Ya)
+            :Menyimpan user ke database;
+        endif
+    endif
+case (Edit User)
+    |Admin|
+    : Memilih user yang akan diedit;
+    : Mengubah nama, email, atau password;
+    |Sistem|
+    : Memeriksa validasi perubahan;
+    : Memperbarui data user di database;
+case (Hapus User)
+    |Admin|
+    : Memilih user yang akan dihapus;
+    |Sistem|
+    : Konfirmasi penghapusan;
+    if (Konfirmasi?) then (Ya)
+        :Menghapus user dari database;
+    else (Tidak)
+        :Batal;
+    endif
+endswitch
+
+:Tampilkan notifikasi sukses;
+stop
+@enduml
+

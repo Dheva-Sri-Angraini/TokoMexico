@@ -1,0 +1,50 @@
+@startuml
+|Admin|
+start
+: Membuka form login;
+|Sistem|
+: Menampilkan Form Login;
+|Admin|
+: Memasukkan Username, Password, dan Security Code;
+|Sistem|
+: Memverifikasi;
+
+if (Validasi?) then (Salah)
+    stop
+else (Benar)
+    :Menampilkan halaman dashboard;
+endif
+
+|Admin|
+: Mengakses Manajemen Member;
+|Sistem|
+: Menampilkan menu manajemen member;
+
+switch (Pilih Aksi)
+case (Tambah Member)
+    |Admin|
+    : Memasukkan nama, telepon, dan alamat;
+    |Sistem|
+    : Menyimpan member ke database;
+case (Edit Member)
+    |Admin|
+    : Memilih member yang akan diedit;
+    : Mengubah informasi member;
+    |Sistem|
+    : Memperbarui data member di database;
+case (Hapus Member)
+    |Admin|
+    : Memilih member yang akan dihapus;
+    |Sistem|
+    : Konfirmasi penghapusan;
+    if (Konfirmasi?) then (Ya)
+        :Menghapus data member dari database;
+    else (Tidak)
+        :Batal;
+    endif
+endswitch
+
+:Tampilkan notifikasi sukses;
+stop
+@enduml
+
